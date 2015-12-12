@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace Lucas_Ebooks
 {
@@ -29,8 +31,13 @@ namespace Lucas_Ebooks
         {
             List<object> fuckList = new List<object>();
             string file = ReadJSON(filename); //File.ReadAllText(filename);
+            JsonSerializerSettings setting = new JsonSerializerSettings();
+            setting.StringEscapeHandling = StringEscapeHandling.EscapeNonAscii;
+            setting.MissingMemberHandling = MissingMemberHandling.Ignore;
             JsonSerializer serializer = new JsonSerializer();
-            var parsedData = JsonConvert.DeserializeObject(file);
+
+            JArray json = JArray.Parse(file);
+            var parsedData = JsonConvert.DeserializeObject(file, typeof(ATweet),setting);
         }
     }
 }

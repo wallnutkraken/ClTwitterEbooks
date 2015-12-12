@@ -10,7 +10,6 @@ namespace Lucas_Ebooks
     {
         static void Main(string[] args)
         {
-
             foreach (string file in Directory.EnumerateFiles("./twitter"))
             {
                 Archive.ReadJSON(file);

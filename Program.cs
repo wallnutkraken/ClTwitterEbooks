@@ -13,7 +13,7 @@ namespace Lucas_Ebooks
 
             foreach (string file in Directory.EnumerateFiles("./twitter"))
             {
-                Archive.ParseFile(file);
+                Archive.ReadJSON(file);
             }
         }
     }

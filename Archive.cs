@@ -1,43 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using TweetSharp;
 using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace Lucas_Ebooks
 {
     static class Archive
     {
-        private static string ReadJSON(string filename)
+        private static List<string> _ATweetContent = new List<string>();
+        private static char[] JsonSplitter = { ':' };
+        public static List<string> ATweetContent
         {
-            StreamReader reader = new StreamReader(filename);
-            string readLine = "";
-            string currentLine = "";
-            reader.ReadLine(); /* Ignore first line */
-            while (currentLine != null)
+            get
             {
-                currentLine = reader.ReadLine();
-                if (currentLine != null)
+                return _ATweetContent;
+            }
+        }
+        /// <summary>
+        /// Parses only the "text" value of the given file
+        /// </summary>
+        /// <param name="filename">Filename of file to read</param>
+        public static void ReadJSON(string filename)
+        {
+            foreach (string line in File.ReadAllLines(filename))
+            {
+                string[] parts = line.Split(JsonSplitter, 2);
+                if (parts[0].Trim(' ') == "\"text\"")
                 {
-                    readLine += currentLine + '\n';
+                    string textStr = Regex.Unescape(parts[1].Trim(' '));
+                    textStr = textStr.Remove(0, 1); /* Removes the initial " */
+                    textStr = textStr.Remove(textStr.Length - 2, 2);
+                    _ATweetContent.Add(textStr);
                 }
             }
-            return readLine;
         }
-        internal static void ParseFile(string filename)
-        {
-            List<object> fuckList = new List<object>();
-            string file = ReadJSON(filename); //File.ReadAllText(filename);
-            JsonSerializerSettings setting = new JsonSerializerSettings();
-            setting.StringEscapeHandling = StringEscapeHandling.EscapeNonAscii;
-            setting.MissingMemberHandling = MissingMemberHandling.Ignore;
-            JsonSerializer serializer = new JsonSerializer();
 
-            JArray json = JArray.Parse(file);
-            var parsedData = JsonConvert.DeserializeObject(file, typeof(ATweet),setting);
-        }
     }
 }

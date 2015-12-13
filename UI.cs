@@ -275,6 +275,8 @@ namespace ClTwitter_Ebooks
             Uri uri = Twitter.Account.GetAuthorizationUri(requestToken);
             Process.Start(uri.ToString());
 
+            Console.WriteLine("In case you don't have a graphical interface, the link is " + uri.ToString());
+
             string verifier = null;
             OAuthAccessToken user;
             do

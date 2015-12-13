@@ -17,7 +17,7 @@ namespace ClTwitter_Ebooks
             Account = new TwitterService(Properties.Settings.Default.ConsumerKey, Properties.Settings.Default.ConsumerSecret);
         }
 
-        private static void LoginTwitter()
+        public static void LoginTwitter()
         {
             Account.AuthenticateWith(Properties.Settings.Default.UserKey, Properties.Settings.Default.UserSecret);
             if (Account.Response.Error != null)

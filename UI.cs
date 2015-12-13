@@ -39,6 +39,8 @@ namespace ClTwitter_Ebooks
                 Console.ReadKey(true);
                 Properties.Settings.Default.FirstRun = false;
                 Properties.Settings.Default.Save();
+                StartUI(); /* Lets the bot start */
+                return;
             }
             else
             {
@@ -210,6 +212,11 @@ namespace ClTwitter_Ebooks
                 GetUserProfileForOptions profOpts = new GetUserProfileForOptions();
                 profOpts.ScreenName = userName;
                 user = Twitter.Account.GetUserProfileFor(profOpts);
+                if (Twitter.Account.Response.Error != null)
+                {
+                    Console.WriteLine(Twitter.Account.Response.Error.Message);
+                    Console.ReadKey(true);
+                }
             } while (Twitter.Account.Response.Error != null);
 
             Properties.Settings.Default.UserId = user.Id;
@@ -245,13 +252,14 @@ namespace ClTwitter_Ebooks
             Properties.Settings.Default.UserId = user.UserId;
             Properties.Settings.Default.UserKey = user.Token;
             Properties.Settings.Default.UserSecret = user.TokenSecret;
+            Twitter.LoginTwitter();
         }
 
         private static void ArchiveLocation()
         {
             Console.Clear();
 
-            Console.WriteLine("The default path to look for the twitter archive .js files is" + 
+            Console.WriteLine("The default path to look for the twitter archive .js files is " + 
                 "the 'twitter' directory where this executable is located.");
             Console.WriteLine("For more information on this, please read INSTALL.md");
             Console.WriteLine("Do you want to change the path? [Y/N]");

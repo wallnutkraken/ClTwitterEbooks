@@ -166,5 +166,29 @@ namespace ClTwitter_Ebooks.Properties {
                 this["SavePeriod"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long LastTweetId {
+            get {
+                return ((long)(this["LastTweetId"]));
+            }
+            set {
+                this["LastTweetId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long LastMentionId {
+            get {
+                return ((long)(this["LastMentionId"]));
+            }
+            set {
+                this["LastMentionId"] = value;
+            }
+        }
     }
 }

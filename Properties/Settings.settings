@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Lucas_Ebooks.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClTwitter_Ebooks.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="ReadArchive" Type="System.Boolean" Scope="User">
@@ -37,6 +37,12 @@
     </Setting>
     <Setting Name="SavePeriod" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3600</Value>
+    </Setting>
+    <Setting Name="LastTweetId" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LastMentionId" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClutteredMarkovGenerator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ClutteredMarkovGenerator.1.0.0.0\lib\net452\ClutteredMarkovGenerator.dll</HintPath>
+    <Reference Include="ClutteredMarkovGenerator, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ClutteredMarkovGenerator.1.2.0.0\lib\net452\ClutteredMarkovGenerator.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">

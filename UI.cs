@@ -26,6 +26,7 @@ namespace ClTwitter_Ebooks
                 SetUser();
                 ArchiveLocation();
                 Archive.ReadArchive();
+                GetUserId();
                 OtherSettings();
 
                 Console.Clear();
@@ -37,7 +38,7 @@ namespace ClTwitter_Ebooks
                 Console.WriteLine("Press any key to start the bot!");
                 Console.ReadKey(true);
                 Properties.Settings.Default.FirstRun = false;
-                //Properties.Settings.Default.Save();
+                Properties.Settings.Default.Save();
             }
             else
             {
@@ -54,7 +55,7 @@ namespace ClTwitter_Ebooks
 
                 if (selection == '1')
                 {
-                    /* Bot start! */
+                    Twitter.BotStart();
                 }
                 else if (selection == '2')
                 {
@@ -193,8 +194,25 @@ namespace ClTwitter_Ebooks
                 } while (charLength > 140);
                 Properties.Settings.Default.MaxCharacterLength = charLength;
 
-                //Properties.Settings.Default.Save();
+                Properties.Settings.Default.Save();
             }
+        }
+
+        private static void GetUserId()
+        {
+            Console.Clear();
+            TwitterUser user;
+            do
+            {
+                Console.WriteLine("Please enter the username of the twitter account which you want to " +
+                    "use to feed this bot information.");
+                string userName = Console.ReadLine();
+                GetUserProfileForOptions profOpts = new GetUserProfileForOptions();
+                profOpts.ScreenName = userName;
+                user = Twitter.Account.GetUserProfileFor(profOpts);
+            } while (Twitter.Account.Response.Error != null);
+
+            Properties.Settings.Default.UserId = user.Id;
         }
 
         private static void SetUser()

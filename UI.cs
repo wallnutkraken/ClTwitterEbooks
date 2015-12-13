@@ -61,6 +61,7 @@ namespace ClTwitter_Ebooks
                 {
                     Markov.Load();
                     Twitter.BotStart();
+                    Twitter.LoginTwitter();
                 }
                 else if (selection == '2')
                 {

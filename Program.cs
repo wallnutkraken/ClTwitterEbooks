@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace ClTwitter_Ebooks
+﻿namespace ClTwitter_Ebooks
 {
     class Program
     {

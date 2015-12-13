@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using TweetSharp;
 
-namespace Lucas_Ebooks
+namespace ClTwitter_Ebooks
 {
     class Twitter
     {

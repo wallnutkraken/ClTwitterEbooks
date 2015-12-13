@@ -4,7 +4,7 @@ using ClutteredMarkov;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace Lucas_Ebooks
+namespace ClTwitter_Ebooks
 {
     static class Archive
     {

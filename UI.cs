@@ -4,7 +4,7 @@ using System.Linq;
 using System.Diagnostics;
 using TweetSharp;
 
-namespace Lucas_Ebooks
+namespace ClTwitter_Ebooks
 {
     static class UI
     {

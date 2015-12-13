@@ -7,8 +7,8 @@
     <ProjectGuid>{959658BE-C079-4535-B9D3-0038663B8563}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lucas_Ebooks</RootNamespace>
-    <AssemblyName>Lucas_Ebooks</AssemblyName>
+    <RootNamespace>ClTwitter_Ebooks</RootNamespace>
+    <AssemblyName>EbooksBot</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

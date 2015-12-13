@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Lucas_Ebooks.Properties {
+namespace ClTwitter_Ebooks.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

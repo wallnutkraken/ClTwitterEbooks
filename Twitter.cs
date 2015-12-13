@@ -11,12 +11,17 @@ namespace ClTwitter_Ebooks
     {
         public static TwitterService Account { get; set; }
 
-
+        /// <summary>
+        /// Starts up the TwitterService object
+        /// </summary>
         public static void Start()
         {
             Account = new TwitterService(Properties.Settings.Default.ConsumerKey, Properties.Settings.Default.ConsumerSecret);
         }
 
+        /// <summary>
+        /// Logs into twitter using the credentials from settings
+        /// </summary>
         public static void LoginTwitter()
         {
             Account.AuthenticateWith(Properties.Settings.Default.UserKey, Properties.Settings.Default.UserSecret);
@@ -28,6 +33,10 @@ namespace ClTwitter_Ebooks
             }
         }
 
+        /// <summary>
+        /// Removes any @mentions from a string
+        /// </summary>
+        /// <param name="original">The string to rid of mentions</param>
         private static string RemoveMentions(string original)
         {
             char[] splitters = { ' ' };
@@ -44,6 +53,9 @@ namespace ClTwitter_Ebooks
             return newString;
         }
 
+        /// <summary>
+        /// A Timer(object) method to get new tweets from twitter and feed them to the Markov chain
+        /// </summary>
         private static void RefreshTweets(object stateinfo)
         {
             ListTweetsOnUserTimelineOptions twOpts = new ListTweetsOnUserTimelineOptions();
@@ -99,12 +111,34 @@ namespace ClTwitter_Ebooks
             Properties.Settings.Default.Save();
         }
 
+        /// <summary>
+        /// Posts a tweet with a Markov-chain generated sentence. Timer method.
+        /// </summary>
+        private static void PostEbooks(object state)
+        {
+            SendTweetOptions tweetOpts = new SendTweetOptions();
+            tweetOpts.Status = MarkovGenerator.Create(Properties.Settings.Default.MaxCharacterLength);
+            Account.SendTweet(tweetOpts);
+
+            if (Account.Response.Error != null)
+            {
+                Console.Beep();
+                Console.WriteLine(Account.Response.Error.Code + ": " + Account.Response.Error.Message);
+            }
+        }
+
+        /// <summary>
+        /// Saves the bots memory. Timer method.
+        /// </summary>
         private static void SaveBotMemory(object state)
         {
             Markov.Save();
             Properties.Settings.Default.Save();
         }
 
+        /// <summary>
+        /// Starts the bot and creates the threads for updating
+        /// </summary>
         public static void BotStart()
         {
             if (Account == null)
@@ -113,12 +147,18 @@ namespace ClTwitter_Ebooks
                 LoginTwitter();
             }
             Markov.Load();
+
             TimerCallback refreshCall = RefreshTweets;
             int refreshtime = Properties.Settings.Default.TwitterFetchTimeout * 1000;
             Timer refresh = new Timer(refreshCall, null, 0, refreshtime);
+
             TimerCallback saveCall = SaveBotMemory;
             int savetime = Properties.Settings.Default.SavePeriod * 1000;
             Timer save = new Timer(refreshCall, null, 0, savetime);
+
+            TimerCallback postCall = PostEbooks;
+            int posttime = Properties.Settings.Default.PostRate * 60000;
+            Timer post = new Timer(postCall, null, 0, posttime);
 
             Console.WriteLine("Bot started. You may press Q at any time to stop the application.");
             char selection;

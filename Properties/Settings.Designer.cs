@@ -190,5 +190,17 @@ namespace ClTwitter_Ebooks.Properties {
                 this["LastMentionId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int PostRate {
+            get {
+                return ((int)(this["PostRate"]));
+            }
+            set {
+                this["PostRate"] = value;
+            }
+        }
     }
 }

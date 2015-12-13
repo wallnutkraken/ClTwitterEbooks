@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using ClutteredMarkov;
 using System.Linq;
 using System.Diagnostics;
 using TweetSharp;
@@ -8,7 +8,9 @@ namespace ClTwitter_Ebooks
 {
     static class UI
     {
-
+        /// <summary>
+        /// The starter method to start up the UI and make all the choices
+        /// </summary>
         public static void StartUI()
         {
             if (Properties.Settings.Default.FirstRun)
@@ -57,6 +59,7 @@ namespace ClTwitter_Ebooks
 
                 if (selection == '1')
                 {
+                    Markov.Load();
                     Twitter.BotStart();
                 }
                 else if (selection == '2')
@@ -66,6 +69,9 @@ namespace ClTwitter_Ebooks
             }
         }
 
+        /// <summary>
+        /// Resets the settings to default values
+        /// </summary>
         private static void ResetSettings()
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -87,6 +93,10 @@ namespace ClTwitter_Ebooks
                 Environment.Exit(0);
             }
         }
+
+        /// <summary>
+        /// Asks if the user wants to use a custom API key, and if so, gets it and places it in the settings
+        /// </summary>
         private static void SetAPIKey()
         {
             char selection = 'b';
@@ -124,6 +134,9 @@ namespace ClTwitter_Ebooks
             }
         }
 
+        /// <summary>
+        /// Asks if the user wants to tinker with any of the additional settings
+        /// </summary>
         private static void OtherSettings()
         {
             Console.Clear();
@@ -153,7 +166,9 @@ namespace ClTwitter_Ebooks
                 int refreshRate = 300;
                 do
                 {
-                    Console.WriteLine("How often do you want the bot to look for new tweets? Default is 300 seconds.");
+                    Console.WriteLine("How often do you want the bot to look for new tweets?.");
+                    Console.WriteLine("In seconds.");
+                    Console.WriteLine("Default is 300.");
                     try
                     {
                         refreshRate = int.Parse(Console.ReadLine());
@@ -169,6 +184,8 @@ namespace ClTwitter_Ebooks
                 do
                 {
                     Console.WriteLine("How often do you want the bot to save the Markov Chain state to file?");
+                    Console.WriteLine("In seconds");
+                    Console.WriteLine("Default is 3600.");
                     try
                     {
                         saveRate = int.Parse(Console.ReadLine());
@@ -183,7 +200,9 @@ namespace ClTwitter_Ebooks
                 int charLength = 140;
                 do
                 {
-                    Console.WriteLine("How long do you want the maximum tweet length to be? (In characters)");
+                    Console.WriteLine("How long do you want the maximum tweet length to be?");
+                    Console.WriteLine("In characters.");
+                    Console.WriteLine("Default is 140");
                     Console.WriteLine("Please do note that tweets cannot be longer than 140 characters");
                     try
                     {
@@ -196,10 +215,30 @@ namespace ClTwitter_Ebooks
                 } while (charLength > 140);
                 Properties.Settings.Default.MaxCharacterLength = charLength;
 
+                int postRate;
+                do
+                {
+                    Console.WriteLine("How often do you want the bot to tweet?");
+                    Console.WriteLine("In minutes.");
+                    Console.WriteLine("Default is 10.");
+                    try
+                    {
+                        postRate = int.Parse(Console.ReadLine());
+                    }
+                    catch (Exception)
+                    {
+                        postRate = 0;
+                    }
+                } while (postRate == 0);
+                Properties.Settings.Default.PostRate = postRate;
+
                 Properties.Settings.Default.Save();
             }
         }
 
+        /// <summary>
+        /// Gets the ID of the Twitter account the user wants to get tweets from
+        /// </summary>
         private static void GetUserId()
         {
             Console.Clear();
@@ -222,6 +261,9 @@ namespace ClTwitter_Ebooks
             Properties.Settings.Default.UserId = user.Id;
         }
 
+        /// <summary>
+        /// Authorizes with twitter and saves the information gotten to the settings
+        /// </summary>
         private static void SetUser()
         {
             if (Twitter.Account == null)
@@ -255,6 +297,9 @@ namespace ClTwitter_Ebooks
             Twitter.LoginTwitter();
         }
 
+        /// <summary>
+        /// Asks if the user wants to set a custom location for the archive. And if so, sets it.
+        /// </summary>
         private static void ArchiveLocation()
         {
             Console.Clear();

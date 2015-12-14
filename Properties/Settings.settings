@@ -6,7 +6,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ArchivePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">twitter/</Value>
+      <Value Profile="(Default)">tweets/</Value>
     </Setting>
     <Setting Name="ConsumerKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">4xw3D7hq3hPFoyXKTsAt7g</Value>

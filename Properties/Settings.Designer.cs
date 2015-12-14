@@ -37,7 +37,7 @@ namespace ClTwitter_Ebooks.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("twitter/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("tweets/")]
         public string ArchivePath {
             get {
                 return ((string)(this["ArchivePath"]));

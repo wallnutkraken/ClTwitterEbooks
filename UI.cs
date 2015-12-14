@@ -87,12 +87,33 @@ namespace ClTwitter_Ebooks
 
             if (selection == 'y')
             {
-                Properties.Settings.Default.Reset();
+                ResetEverything();
                 Console.Clear();
                 Console.WriteLine("Settings reset.");
                 Console.ReadKey(true);
                 Environment.Exit(0);
             }
+        }
+        
+        private static void ResetEverything()
+        {
+            Properties.Settings.Default.ArchivePath = "tweets/";
+            Properties.Settings.Default.ConsumerKey = "4xw3D7hq3hPFoyXKTsAt7g";
+            Properties.Settings.Default.ConsumerSecret = "yaIuTfA21lNyOTV0YVYIsOK7zSndNtuxp7tqaIiPhQ8";
+            Properties.Settings.Default.ReadArchive = true;
+            Properties.Settings.Default.FirstRun = true;
+            Properties.Settings.Default.LastMentionId = 0;
+            Properties.Settings.Default.LastTweetId = 0;
+            Properties.Settings.Default.MaxCharacterLength = 140;
+            Properties.Settings.Default.PostRate = 10;
+            Properties.Settings.Default.ReplyEbook = false;
+            Properties.Settings.Default.SavePeriod = 3600;
+            Properties.Settings.Default.TwitterFetchTimeout = 300;
+            Properties.Settings.Default.UserId = 0;
+            Properties.Settings.Default.UserKey = "";
+            Properties.Settings.Default.UserSecret = "";
+
+            Properties.Settings.Default.Save();
         }
 
         /// <summary>

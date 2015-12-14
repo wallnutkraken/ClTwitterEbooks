@@ -37,7 +37,7 @@ namespace ClTwitter_Ebooks
         /// Removes any @mentions from a string
         /// </summary>
         /// <param name="original">The string to rid of mentions</param>
-        private static string RemoveMentions(string original)
+        internal static string RemoveMentions(string original)
         {
             char[] splitters = { ' ' };
             string[] words = original.Split(splitters);

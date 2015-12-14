@@ -51,7 +51,7 @@ namespace ClTwitter_Ebooks
         {
             foreach (string line in ATweetContent)
             {
-                Markov.Feed(line);
+                Markov.Feed(Twitter.RemoveMentions(line));
             }
             Markov.Save();
         }
